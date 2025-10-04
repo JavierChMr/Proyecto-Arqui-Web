@@ -1,0 +1,1016 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict TE5hmsj7M54DWx0mpjpqUAw1eVHj4J1gwIuVn8CZ3GndmbFrgZTU4kfhRNLp2gy
+
+-- Dumped from database version 17.6
+-- Dumped by pg_dump version 17.6
+
+-- Started on 2025-09-13 18:16:24 -05
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 218 (class 1259 OID 17096)
+-- Name: asesor; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.asesor (
+    id_asesor integer NOT NULL,
+    nombre text,
+    apellido text,
+    telefono text,
+    dni text,
+    correo_electronico text
+);
+
+
+ALTER TABLE public.asesor OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 17095)
+-- Name: asesor_id_asesor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.asesor_id_asesor_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.asesor_id_asesor_seq OWNER TO postgres;
+
+--
+-- TOC entry 3829 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: asesor_id_asesor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.asesor_id_asesor_seq OWNED BY public.asesor.id_asesor;
+
+
+--
+-- TOC entry 226 (class 1259 OID 17147)
+-- Name: asesoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.asesoria (
+    id_asesoria integer NOT NULL,
+    nombre text,
+    descripcion text,
+    precio double precision,
+    id_empresa integer NOT NULL,
+    id_cliente integer NOT NULL
+);
+
+
+ALTER TABLE public.asesoria OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 17146)
+-- Name: asesoria_id_asesoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.asesoria_id_asesoria_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.asesoria_id_asesoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 3830 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: asesoria_id_asesoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.asesoria_id_asesoria_seq OWNED BY public.asesoria.id_asesoria;
+
+
+--
+-- TOC entry 228 (class 1259 OID 17161)
+-- Name: categoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categoria (
+    id_categoria integer NOT NULL,
+    nombre text,
+    descripcion text,
+    id_asesor integer NOT NULL
+);
+
+
+ALTER TABLE public.categoria OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 17160)
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categoria_id_categoria_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.categoria_id_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 3831 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categoria_id_categoria_seq OWNED BY public.categoria.id_categoria;
+
+
+--
+-- TOC entry 220 (class 1259 OID 17105)
+-- Name: cliente; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cliente (
+    id_cliente integer NOT NULL,
+    nombre text,
+    apellido text,
+    telefono text,
+    dni text,
+    correo_electronico text
+);
+
+
+ALTER TABLE public.cliente OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 17104)
+-- Name: cliente_id_cliente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cliente_id_cliente_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNER TO postgres;
+
+--
+-- TOC entry 3832 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: cliente_id_cliente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cliente_id_cliente_seq OWNED BY public.cliente.id_cliente;
+
+
+--
+-- TOC entry 224 (class 1259 OID 17133)
+-- Name: empresa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.empresa (
+    id_empresa integer NOT NULL,
+    nombre character varying(255),
+    correo_electronico character varying(255),
+    id_usuario integer NOT NULL,
+    id_asesor integer NOT NULL,
+    id_cliente integer NOT NULL
+);
+
+
+ALTER TABLE public.empresa OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 17132)
+-- Name: empresa_id_empresa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.empresa_id_empresa_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.empresa_id_empresa_seq OWNER TO postgres;
+
+--
+-- TOC entry 3833 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: empresa_id_empresa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.empresa_id_empresa_seq OWNED BY public.empresa.id_empresa;
+
+
+--
+-- TOC entry 230 (class 1259 OID 17175)
+-- Name: pagos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pagos (
+    id_pago integer NOT NULL,
+    monto double precision,
+    metodo_pago text,
+    fecha_pago date,
+    id_asesoria integer NOT NULL
+);
+
+
+ALTER TABLE public.pagos OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 17174)
+-- Name: pagos_id_pago_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pagos_id_pago_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.pagos_id_pago_seq OWNER TO postgres;
+
+--
+-- TOC entry 3834 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: pagos_id_pago_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pagos_id_pago_seq OWNED BY public.pagos.id_pago;
+
+
+--
+-- TOC entry 232 (class 1259 OID 17189)
+-- Name: planes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.planes (
+    id_plan integer NOT NULL,
+    nombre text,
+    descripcion text,
+    precio double precision,
+    duracion integer,
+    beneficios text
+);
+
+
+ALTER TABLE public.planes OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 17188)
+-- Name: planes_id_plan_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.planes_id_plan_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.planes_id_plan_seq OWNER TO postgres;
+
+--
+-- TOC entry 3835 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: planes_id_plan_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.planes_id_plan_seq OWNED BY public.planes.id_plan;
+
+
+--
+-- TOC entry 234 (class 1259 OID 17198)
+-- Name: resenhas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.resenhas (
+    id_resenha integer NOT NULL,
+    puntaje integer,
+    comentario text,
+    fecha date,
+    id_asesoria integer NOT NULL,
+    id_cliente integer NOT NULL
+);
+
+
+ALTER TABLE public.resenhas OWNER TO postgres;
+
+--
+-- TOC entry 233 (class 1259 OID 17197)
+-- Name: resenhas_id_resenha_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.resenhas_id_resenha_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.resenhas_id_resenha_seq OWNER TO postgres;
+
+--
+-- TOC entry 3836 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: resenhas_id_resenha_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.resenhas_id_resenha_seq OWNED BY public.resenhas.id_resenha;
+
+
+--
+-- TOC entry 236 (class 1259 OID 17217)
+-- Name: suscripciones; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.suscripciones (
+    id_suscripciones integer NOT NULL,
+    fecha_inicio date,
+    fecha_fin date,
+    estado text,
+    id_plan integer NOT NULL,
+    id_usuario integer NOT NULL,
+    id_cliente integer NOT NULL,
+    id_asesor integer NOT NULL
+);
+
+
+ALTER TABLE public.suscripciones OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 17216)
+-- Name: suscripciones_id_suscripciones_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.suscripciones_id_suscripciones_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.suscripciones_id_suscripciones_seq OWNER TO postgres;
+
+--
+-- TOC entry 3837 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: suscripciones_id_suscripciones_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.suscripciones_id_suscripciones_seq OWNED BY public.suscripciones.id_suscripciones;
+
+
+--
+-- TOC entry 237 (class 1259 OID 17235)
+-- Name: usuario_asesoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario_asesoria (
+    id_asesoria integer NOT NULL,
+    id_usuario integer NOT NULL,
+    id_cliente integer NOT NULL,
+    id_asesor integer NOT NULL
+);
+
+
+ALTER TABLE public.usuario_asesoria OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 17114)
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios (
+    id_usuario integer NOT NULL,
+    id_cliente integer NOT NULL,
+    id_asesor integer NOT NULL
+);
+
+
+ALTER TABLE public.usuarios OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 17113)
+-- Name: usuarios_id_usuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usuarios_id_usuario_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.usuarios_id_usuario_seq OWNER TO postgres;
+
+--
+-- TOC entry 3838 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: usuarios_id_usuario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.usuarios_id_usuario_seq OWNED BY public.usuarios.id_usuario;
+
+
+--
+-- TOC entry 3606 (class 2604 OID 17099)
+-- Name: asesor id_asesor; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesor ALTER COLUMN id_asesor SET DEFAULT nextval('public.asesor_id_asesor_seq'::regclass);
+
+
+--
+-- TOC entry 3610 (class 2604 OID 17150)
+-- Name: asesoria id_asesoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesoria ALTER COLUMN id_asesoria SET DEFAULT nextval('public.asesoria_id_asesoria_seq'::regclass);
+
+
+--
+-- TOC entry 3611 (class 2604 OID 17164)
+-- Name: categoria id_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria ALTER COLUMN id_categoria SET DEFAULT nextval('public.categoria_id_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 3607 (class 2604 OID 17108)
+-- Name: cliente id_cliente; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cliente ALTER COLUMN id_cliente SET DEFAULT nextval('public.cliente_id_cliente_seq'::regclass);
+
+
+--
+-- TOC entry 3609 (class 2604 OID 17136)
+-- Name: empresa id_empresa; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa ALTER COLUMN id_empresa SET DEFAULT nextval('public.empresa_id_empresa_seq'::regclass);
+
+
+--
+-- TOC entry 3612 (class 2604 OID 17178)
+-- Name: pagos id_pago; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pagos ALTER COLUMN id_pago SET DEFAULT nextval('public.pagos_id_pago_seq'::regclass);
+
+
+--
+-- TOC entry 3613 (class 2604 OID 17192)
+-- Name: planes id_plan; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.planes ALTER COLUMN id_plan SET DEFAULT nextval('public.planes_id_plan_seq'::regclass);
+
+
+--
+-- TOC entry 3614 (class 2604 OID 17201)
+-- Name: resenhas id_resenha; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.resenhas ALTER COLUMN id_resenha SET DEFAULT nextval('public.resenhas_id_resenha_seq'::regclass);
+
+
+--
+-- TOC entry 3615 (class 2604 OID 17220)
+-- Name: suscripciones id_suscripciones; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.suscripciones ALTER COLUMN id_suscripciones SET DEFAULT nextval('public.suscripciones_id_suscripciones_seq'::regclass);
+
+
+--
+-- TOC entry 3608 (class 2604 OID 17117)
+-- Name: usuarios id_usuario; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios ALTER COLUMN id_usuario SET DEFAULT nextval('public.usuarios_id_usuario_seq'::regclass);
+
+
+--
+-- TOC entry 3804 (class 0 OID 17096)
+-- Dependencies: 218
+-- Data for Name: asesor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.asesor (id_asesor, nombre, apellido, telefono, dni, correo_electronico) FROM stdin;
+1	Jose	Apoloni	923213085	73258267	u202311590@upc.edu.pe
+\.
+
+
+--
+-- TOC entry 3812 (class 0 OID 17147)
+-- Dependencies: 226
+-- Data for Name: asesoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.asesoria (id_asesoria, nombre, descripcion, precio, id_empresa, id_cliente) FROM stdin;
+1	Matematicas	Refuerzo de calculo	50	5	2
+2	Ciencias	Refuerzo Fisica	78	5	3
+\.
+
+
+--
+-- TOC entry 3814 (class 0 OID 17161)
+-- Dependencies: 228
+-- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.categoria (id_categoria, nombre, descripcion, id_asesor) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3806 (class 0 OID 17105)
+-- Dependencies: 220
+-- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.cliente (id_cliente, nombre, apellido, telefono, dni, correo_electronico) FROM stdin;
+2	Bryan	Abad	971777164	23456782	bryan@gmail.com
+3	Pedro	Melgarejo	998756437	56783496	pedro@gmail.com
+\.
+
+
+--
+-- TOC entry 3810 (class 0 OID 17133)
+-- Dependencies: 224
+-- Data for Name: empresa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.empresa (id_empresa, nombre, correo_electronico, id_usuario, id_asesor, id_cliente) FROM stdin;
+5	SkillLink	skilllink@gmail.com	1	1	2
+\.
+
+
+--
+-- TOC entry 3816 (class 0 OID 17175)
+-- Dependencies: 230
+-- Data for Name: pagos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pagos (id_pago, monto, metodo_pago, fecha_pago, id_asesoria) FROM stdin;
+4	78	Efectivo	2025-09-12	2
+5	78	Tarjeta	2025-09-10	2
+\.
+
+
+--
+-- TOC entry 3818 (class 0 OID 17189)
+-- Dependencies: 232
+-- Data for Name: planes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.planes (id_plan, nombre, descripcion, precio, duracion, beneficios) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3820 (class 0 OID 17198)
+-- Dependencies: 234
+-- Data for Name: resenhas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.resenhas (id_resenha, puntaje, comentario, fecha, id_asesoria, id_cliente) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3822 (class 0 OID 17217)
+-- Dependencies: 236
+-- Data for Name: suscripciones; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.suscripciones (id_suscripciones, fecha_inicio, fecha_fin, estado, id_plan, id_usuario, id_cliente, id_asesor) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3823 (class 0 OID 17235)
+-- Dependencies: 237
+-- Data for Name: usuario_asesoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuario_asesoria (id_asesoria, id_usuario, id_cliente, id_asesor) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3808 (class 0 OID 17114)
+-- Dependencies: 222
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.usuarios (id_usuario, id_cliente, id_asesor) FROM stdin;
+1	2	1
+\.
+
+
+--
+-- TOC entry 3839 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: asesor_id_asesor_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.asesor_id_asesor_seq', 1, true);
+
+
+--
+-- TOC entry 3840 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: asesoria_id_asesoria_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.asesoria_id_asesoria_seq', 2, true);
+
+
+--
+-- TOC entry 3841 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: categoria_id_categoria_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.categoria_id_categoria_seq', 1, false);
+
+
+--
+-- TOC entry 3842 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: cliente_id_cliente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cliente_id_cliente_seq', 3, true);
+
+
+--
+-- TOC entry 3843 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: empresa_id_empresa_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.empresa_id_empresa_seq', 5, true);
+
+
+--
+-- TOC entry 3844 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: pagos_id_pago_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pagos_id_pago_seq', 5, true);
+
+
+--
+-- TOC entry 3845 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: planes_id_plan_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.planes_id_plan_seq', 1, false);
+
+
+--
+-- TOC entry 3846 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: resenhas_id_resenha_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.resenhas_id_resenha_seq', 1, false);
+
+
+--
+-- TOC entry 3847 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: suscripciones_id_suscripciones_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.suscripciones_id_suscripciones_seq', 1, false);
+
+
+--
+-- TOC entry 3848 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: usuarios_id_usuario_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usuarios_id_usuario_seq', 1, true);
+
+
+--
+-- TOC entry 3617 (class 2606 OID 17103)
+-- Name: asesor asesor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesor
+    ADD CONSTRAINT asesor_pkey PRIMARY KEY (id_asesor);
+
+
+--
+-- TOC entry 3629 (class 2606 OID 17154)
+-- Name: asesoria asesoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesoria
+    ADD CONSTRAINT asesoria_pkey PRIMARY KEY (id_asesoria);
+
+
+--
+-- TOC entry 3631 (class 2606 OID 17168)
+-- Name: categoria categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria
+    ADD CONSTRAINT categoria_pkey PRIMARY KEY (id_categoria);
+
+
+--
+-- TOC entry 3619 (class 2606 OID 17112)
+-- Name: cliente cliente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cliente
+    ADD CONSTRAINT cliente_pkey PRIMARY KEY (id_cliente);
+
+
+--
+-- TOC entry 3627 (class 2606 OID 17140)
+-- Name: empresa empresa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT empresa_pkey PRIMARY KEY (id_empresa);
+
+
+--
+-- TOC entry 3633 (class 2606 OID 17182)
+-- Name: pagos pagos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pagos
+    ADD CONSTRAINT pagos_pkey PRIMARY KEY (id_pago);
+
+
+--
+-- TOC entry 3635 (class 2606 OID 17196)
+-- Name: planes planes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.planes
+    ADD CONSTRAINT planes_pkey PRIMARY KEY (id_plan);
+
+
+--
+-- TOC entry 3637 (class 2606 OID 17205)
+-- Name: resenhas resenhas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.resenhas
+    ADD CONSTRAINT resenhas_pkey PRIMARY KEY (id_resenha);
+
+
+--
+-- TOC entry 3639 (class 2606 OID 17224)
+-- Name: suscripciones suscripciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.suscripciones
+    ADD CONSTRAINT suscripciones_pkey PRIMARY KEY (id_suscripciones);
+
+
+--
+-- TOC entry 3621 (class 2606 OID 17261)
+-- Name: usuarios ukstjg0wjxiv5xhtl780tvn36cx; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT ukstjg0wjxiv5xhtl780tvn36cx UNIQUE (id_asesor, id_cliente, id_usuario);
+
+
+--
+-- TOC entry 3641 (class 2606 OID 17239)
+-- Name: usuario_asesoria usuario_asesoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_asesoria
+    ADD CONSTRAINT usuario_asesoria_pkey PRIMARY KEY (id_asesoria, id_usuario, id_cliente, id_asesor);
+
+
+--
+-- TOC entry 3623 (class 2606 OID 17121)
+-- Name: usuarios usuarios_id_usuario_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_id_usuario_key UNIQUE (id_usuario);
+
+
+--
+-- TOC entry 3625 (class 2606 OID 17119)
+-- Name: usuarios usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id_usuario, id_cliente, id_asesor);
+
+
+--
+-- TOC entry 3648 (class 2606 OID 17155)
+-- Name: asesoria asesoria_id_empresa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesoria
+    ADD CONSTRAINT asesoria_id_empresa_fkey FOREIGN KEY (id_empresa) REFERENCES public.empresa(id_empresa);
+
+
+--
+-- TOC entry 3650 (class 2606 OID 17169)
+-- Name: categoria categoria_id_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria
+    ADD CONSTRAINT categoria_id_asesor_fkey FOREIGN KEY (id_asesor) REFERENCES public.asesor(id_asesor);
+
+
+--
+-- TOC entry 3644 (class 2606 OID 17141)
+-- Name: empresa empresa_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT empresa_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES public.usuarios(id_usuario);
+
+
+--
+-- TOC entry 3649 (class 2606 OID 17255)
+-- Name: asesoria fk522reg63gt9r9kupc8ibk45y7; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.asesoria
+    ADD CONSTRAINT fk522reg63gt9r9kupc8ibk45y7 FOREIGN KEY (id_cliente) REFERENCES public.cliente(id_cliente);
+
+
+--
+-- TOC entry 3645 (class 2606 OID 17280)
+-- Name: empresa fk94rvdehivjvy9xww0qtxyapme; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT fk94rvdehivjvy9xww0qtxyapme FOREIGN KEY (id_cliente) REFERENCES public.cliente(id_cliente);
+
+
+--
+-- TOC entry 3646 (class 2606 OID 17274)
+-- Name: empresa fk9qfivscksvxtgusp4pxwhmsqf; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT fk9qfivscksvxtgusp4pxwhmsqf FOREIGN KEY (id_asesor) REFERENCES public.asesor(id_asesor);
+
+
+--
+-- TOC entry 3647 (class 2606 OID 17250)
+-- Name: empresa fks35sgioaefpk24wupi61sl53h; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT fks35sgioaefpk24wupi61sl53h FOREIGN KEY (id_asesor, id_cliente, id_usuario) REFERENCES public.usuarios(id_usuario, id_cliente, id_asesor);
+
+
+--
+-- TOC entry 3651 (class 2606 OID 17183)
+-- Name: pagos pagos_id_asesoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pagos
+    ADD CONSTRAINT pagos_id_asesoria_fkey FOREIGN KEY (id_asesoria) REFERENCES public.asesoria(id_asesoria);
+
+
+--
+-- TOC entry 3652 (class 2606 OID 17206)
+-- Name: resenhas resenhas_id_asesoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.resenhas
+    ADD CONSTRAINT resenhas_id_asesoria_fkey FOREIGN KEY (id_asesoria) REFERENCES public.asesoria(id_asesoria);
+
+
+--
+-- TOC entry 3653 (class 2606 OID 17211)
+-- Name: resenhas resenhas_id_cliente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.resenhas
+    ADD CONSTRAINT resenhas_id_cliente_fkey FOREIGN KEY (id_cliente) REFERENCES public.cliente(id_cliente);
+
+
+--
+-- TOC entry 3654 (class 2606 OID 17225)
+-- Name: suscripciones suscripciones_id_plan_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.suscripciones
+    ADD CONSTRAINT suscripciones_id_plan_fkey FOREIGN KEY (id_plan) REFERENCES public.planes(id_plan);
+
+
+--
+-- TOC entry 3655 (class 2606 OID 17230)
+-- Name: suscripciones suscripciones_id_usuario_id_cliente_id_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.suscripciones
+    ADD CONSTRAINT suscripciones_id_usuario_id_cliente_id_asesor_fkey FOREIGN KEY (id_usuario, id_cliente, id_asesor) REFERENCES public.usuarios(id_usuario, id_cliente, id_asesor);
+
+
+--
+-- TOC entry 3656 (class 2606 OID 17240)
+-- Name: usuario_asesoria usuario_asesoria_id_asesoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_asesoria
+    ADD CONSTRAINT usuario_asesoria_id_asesoria_fkey FOREIGN KEY (id_asesoria) REFERENCES public.asesoria(id_asesoria);
+
+
+--
+-- TOC entry 3657 (class 2606 OID 17245)
+-- Name: usuario_asesoria usuario_asesoria_id_usuario_id_cliente_id_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_asesoria
+    ADD CONSTRAINT usuario_asesoria_id_usuario_id_cliente_id_asesor_fkey FOREIGN KEY (id_usuario, id_cliente, id_asesor) REFERENCES public.usuarios(id_usuario, id_cliente, id_asesor);
+
+
+--
+-- TOC entry 3642 (class 2606 OID 17127)
+-- Name: usuarios usuarios_id_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_id_asesor_fkey FOREIGN KEY (id_asesor) REFERENCES public.asesor(id_asesor);
+
+
+--
+-- TOC entry 3643 (class 2606 OID 17122)
+-- Name: usuarios usuarios_id_cliente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios
+    ADD CONSTRAINT usuarios_id_cliente_fkey FOREIGN KEY (id_cliente) REFERENCES public.cliente(id_cliente);
+
+
+-- Completed on 2025-09-13 18:16:24 -05
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict TE5hmsj7M54DWx0mpjpqUAw1eVHj4J1gwIuVn8CZ3GndmbFrgZTU4kfhRNLp2gy
+
